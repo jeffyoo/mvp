@@ -1,0 +1,54 @@
+<html ng-app="app">
+<head>
+  <title>Can I Afford This Car?</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script src="index.js"></script>
+
+</head>
+<h1>Can I Afford This Car?</h1>
+
+<body ng-controller="MyController as vm">
+
+<div ng-init="carMake = vm.getMake()"></div>
+
+<!-- JEFF: Ask a fellow to explain the ng-options.. -->
+  Choose a make
+  <br>
+  <select ng-model="vm.carMake" ng-options="x for x in vm.carMakes" ng-change="vm.getModel(vm.carMake)">
+    <option value="">- Choose Make -</option>
+  </select>
+  <br>
+  <br>
+  Choose a model
+  <br>
+<!-- JEFF: vm.carModels is not getting populated -->
+  <select ng-model="vm.carModel" ng-options="x for x in vm.carModels" ng-change="vm.getVehicleId(vm.carMake, vm.carModel)">
+    <option value="">- Choose Model -</option>
+  </select>
+
+
+  <br>
+  <br>
+  How much do you earn a month? After taxes. Don't lie.
+  <form ng-submit="vm.inputSalary()">
+
+    <input type="text" ng-model="vm.monthlySalary" placeholder="Input Monthly Salary">
+
+<!--     <br>
+    <input type="text" ng-model="vm.vehicleID" placeholder="Input Vehicle ID"> 101353968 -->
+    <br>
+    <br>
+    <button type="submit" ng-click="vm.makeCall(vm.vehicleId)">Submit</button>
+
+  </form>
+
+  <p ng-show="vm.price===1">You can buy it!</p>
+  <p ng-show="vm.price===2">You're too poor to buy it</p>
+
+
+</body>
+
+
+
+</html>
